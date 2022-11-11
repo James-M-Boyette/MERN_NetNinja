@@ -2,6 +2,7 @@ import express from "express";
 // Setup ENVs ...
 import dotenv from "dotenv";
 dotenv.config();
+import mongoose from "mongoose";
 
 // Stores our 'express' app in 'app'
 const app = express();
@@ -45,3 +46,22 @@ app.use("/api/workouts", workoutRoutes);
 app.listen(process.env.PORT, () => {
   console.log(`listening on port ${process.env.PORT} !`);
 });
+
+// Connection to Database
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    // API Listening for requests after DB connection succesful ...
+    app.listen(process.env.PORT, process.env.HOST, () => {
+      console.log(`🚀 Running MERN_Demo Server on PORT: ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+// mongoose
+// .connect("mongodb://localhost:27017/test")
+// .catch((error) => console.error(error));

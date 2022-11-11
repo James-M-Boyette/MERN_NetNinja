@@ -1,13 +1,13 @@
 import express from "express";
+import {
+  createWorkout,
+  getWorkouts,
+} from "../controllers/workoutController.js";
 
 const workoutsRouter = express.Router();
 
 // GET all workouts
-workoutsRouter.get("/", (req, res) => {
-  res.json({
-    msg: `GET all workouts ...`,
-  });
-});
+workoutsRouter.get("/", getWorkouts);
 
 // GET a single workout
 workoutsRouter.get("/:id", (req, res) => {
@@ -17,11 +17,7 @@ workoutsRouter.get("/:id", (req, res) => {
 });
 
 // POST a single workout
-workoutsRouter.post("/", (req, res) => {
-  res.json({
-    msg: `POST a single workout`,
-  });
-});
+workoutsRouter.post("/", createWorkout);
 
 // UPDATE a single workout
 workoutsRouter.patch("/:id", (req, res) => {
