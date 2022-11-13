@@ -2,6 +2,9 @@ import express from "express";
 import {
   createWorkout,
   getWorkouts,
+  getWorkout,
+  deleteWorkout,
+  updateWorkout,
 } from "../controllers/workoutController.js";
 
 const workoutsRouter = express.Router();
@@ -10,27 +13,15 @@ const workoutsRouter = express.Router();
 workoutsRouter.get("/", getWorkouts);
 
 // GET a single workout
-workoutsRouter.get("/:id", (req, res) => {
-  res.json({
-    msg: `GET a single workout`,
-  });
-});
+workoutsRouter.get("/:id", getWorkout);
 
 // POST a single workout
 workoutsRouter.post("/", createWorkout);
 
 // UPDATE a single workout
-workoutsRouter.patch("/:id", (req, res) => {
-  res.json({
-    msg: `UPDATE a single workout`,
-  });
-});
+workoutsRouter.patch("/:id", updateWorkout);
 
 // DELETE a single workout
-workoutsRouter.delete("/:id", (req, res) => {
-  res.json({
-    msg: `DELETE a single workout`,
-  });
-});
+workoutsRouter.delete("/:id", deleteWorkout);
 
 export default workoutsRouter;
